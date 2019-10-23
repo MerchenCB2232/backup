@@ -1,15 +1,17 @@
 import random
+import time
 myWord = "egghead"
 count = 0
 secretList = list(myWord)
 secret = []
 missedLetters = []
+numMiss = int(input("How many misses till you game over? "))
 for a in secretList:
 	secret.append("_")
 print("Welcome to Hangman! Once you've guessed all the letters, guess the word!")
 print (secret)
 while True:
-	if count > 10:
+	if count == numMiss:
 		print("Game Over!")
 		break
 	else:
@@ -21,7 +23,9 @@ while True:
 		pass
 	choice2 = input("Enter l to guess a letter, w to guess a word, and q to quit: ")
 	if choice2 == "l":
-		letter = input("Type a letter: ")
+		letter = input("Type a letter (You have 10 seconds!) ")
+		time.sleep(10)
+		print("You took too long")
 		if letter in myWord:
 			if letter == "e":
 				secret[0] = "e"
@@ -46,6 +50,7 @@ while True:
 				secret[6] = "d"
 				print(secret)
 				print("Misses: " + str(count))
+
 		else:
 			print("Letter is not in word")
 			missedLetters.append(letter)
